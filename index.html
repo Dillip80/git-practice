@@ -19,13 +19,22 @@
         message: e.target.message.value
       };
 
-      await fetch("https://lemon-bay-05c20000f.2.azurestaticapps.net", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      });
+      try {
+        const response = await fetch("/api/submit-feedback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData)
+        });
 
-      alert("Feedback submitted!");
+        if (response.ok) {
+          alert("Feedback submitted!");
+        } else {
+          alert("Failed to submit feedback.");
+        }
+      } catch (error) {
+        console.error("Error submitting feedback:", error);
+        alert("An error occurred.");
+      }
     });
   </script>
 </body>
