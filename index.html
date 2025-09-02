@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Feedback Form</title>
+</head>
+<body>
+  <h2>Submit Your Feedback</h2>
+  <form id="feedbackForm">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <textarea name="message" placeholder="Your Feedback" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById("feedbackForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const formData = {
+        name: e.target.name.value,
+        message: e.target.message.value
+      };
+
+      await fetch("https://lemon-bay-05c20000f.2.azurestaticapps.net", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      alert("Feedback submitted!");
+    });
+  </script>
+</body>
+</html>
