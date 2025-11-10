@@ -1,4 +1,4 @@
-name: Deploy Flask App to Azure
+name: Build and Deploy Flask App to Azure
 
 on:
   push:
@@ -10,25 +10,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
 
+      # Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # Zip the app for deployment
       - name: Zip the app
         run: zip -r app.zip .
 
+      # ✅ Deploy to Azure Web App using Publish Profile
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: github-deployment
-          publish-profile: ${{ secrets.MY_SECRET }}
+          app-name: github-deployment   # Replace with your Azure Web App name
+          publish-profile: ${{ secrets.MY_SECRET }}  # Ensure secret name matches in GitHub
           package: app.zip
+
+      # ✅ Upload artifact for Azure DevOps Release Pipeline
+      - name: Upload artifact for Azure DevOps
+        uses: actions/upload-artifact@v3
+        with:
+          name: flask-app
+          path: app.zip
