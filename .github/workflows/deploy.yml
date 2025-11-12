@@ -38,9 +38,4 @@ jobs:
           publish-profile: ${{ secrets.MY_SECRET }}  # Ensure secret name matches in GitHub
           package: app.zip
 
-      # ✅ Upload artifact for Azure DevOps Release Pipeline
-      - name: Upload artifact for Azure DevOps
-        uses: actions/upload-artifact@v4   # Updated to v4
-        with:
-          name: flask-app
-          path: app.zip
+
