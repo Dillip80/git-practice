@@ -4,8 +4,8 @@ trigger:
       - main
 
 variables:
-  azureSubscription: '<your-service-connection>'
-  acrName: '<your-acr-name>'
+  azureSubscription: '94685a32-e8ce-4a91-a70c-1a200302d3ac'
+  acrName: 'containeraks'
   aksNamespace: 'microservices'
 
 stages:
@@ -46,8 +46,8 @@ stages:
       inputs:
         connectionType: 'Azure Resource Manager'
         azureSubscription: '$(azureSubscription)'
-        azureResourceGroup: '<your-resource-group>'
-        kubernetesCluster: '<your-aks-cluster>'
+        azureResourceGroup: 'rg-webapp-demo'
+        kubernetesCluster: 'kubernetescluster'
         namespace: '$(aksNamespace)'
         command: 'apply'
         useConfigurationFile: true
