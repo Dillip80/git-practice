@@ -1,6 +1,6 @@
 replicaCount: 2
 image:
-  repository: <your-acr-name>.azurecr.io
+  repository: containeraks.azurecr.io
   tag: latest
 service:
   type: ClusterIP
